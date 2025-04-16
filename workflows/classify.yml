@@ -1,16 +1,16 @@
 name: Classify Strava Activities
 
 on:
-  workflow_dispatch:      # ermöglicht manuellen Start über GitHub UI
+  workflow_dispatch:      # manueller Start
   schedule:
-    - cron: '0 * * * *'   # jede volle Stunde
+    - cron: '0 * * * *'   # jede Stunde
 
 jobs:
   classify:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -21,9 +21,9 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run Strava classifier
+      - name: Run classification
         env:
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
-        run: python classify.py
+        run: python classify_activities/classify.py
