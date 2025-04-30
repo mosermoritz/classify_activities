@@ -24,4 +24,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run classify script
-        run: python classify_activities/classify.py
+        run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
+          python classify_activities/classify.py
+
