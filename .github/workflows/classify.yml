@@ -2,8 +2,8 @@ name: Classify Strava Activities
 
 on:
   schedule:
-    - cron: "*/10 * * * *"  # Alle 10 Minuten
-  workflow_dispatch:       # Manuelles Triggern per GitHub UI
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
 
 jobs:
   run-script:
@@ -29,7 +29,6 @@ jobs:
           CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
         run: |
-          export PYTHONPATH=$PYTHONPATH:$(pwd)
-          python classify_activities/classify.py
-
-
+          cd classify_activities
+          export PYTHONPATH=$PYTHONPATH:$(pwd)/..
+          python classify.py
