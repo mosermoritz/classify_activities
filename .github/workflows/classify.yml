@@ -24,4 +24,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run classify script
-        run: python classify.py
+        run: python classify_activities/classify.py
